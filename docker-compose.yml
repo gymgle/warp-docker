@@ -2,13 +2,13 @@ version: '3'
 
 services:
   warp:
-    image: caomingjun/warp
+    image: tseter/warp
     container_name: warp
     restart: always
     ports:
       - '1080:1080'
     environment:
-      - WARP_SLEEP=2
+      - WARP_SLEEP=3
       # - WARP_LICENSE_KEY= # optional
     cap_add:
       - NET_ADMIN

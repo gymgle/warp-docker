@@ -10,9 +10,9 @@ RUN apt-get update && \
     apt-get install -y cloudflare-warp && \
     apt-get clean && \
     apt-get autoremove -y && \
-    curl -LO https://github.com/ginuerzh/gost/releases/download/v2.11.2/gost-linux-amd64-2.11.2.gz && \
-    gunzip gost-linux-amd64-2.11.2.gz && \
-    mv gost-linux-amd64-2.11.2 /usr/bin/gost && \
+    curl -LO https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz && \
+    gunzip gost-linux-amd64-2.11.5.gz && \
+    mv gost-linux-amd64-2.11.5 /usr/bin/gost && \
     chmod +x /usr/bin/gost
 
 # Accept Cloudflare WARP TOS
@@ -22,9 +22,9 @@ RUN mkdir -p /root/.local/share/warp && \
 COPY entrypoint.sh /entrypoint.sh
 
 ENV GOST_ARGS="-L :1080"
-ENV WARP_SLEEP=2
+ENV WARP_SLEEP=3
 
-HEALTHCHECK --interval=15s --timeout=5s --start-period=30s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
   CMD curl -fsS "https://cloudflare.com/cdn-cgi/trace" | grep -qE "warp=(plus|on)" || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
